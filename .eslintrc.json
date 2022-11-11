@@ -11,10 +11,9 @@
             "extends": [
                 "plugin:@angular-eslint/recommended",
                 "plugin:@angular-eslint/template/process-inline-templates",
-                "prettier",
+                "prettier"
                 //        // Стайл гайд AirBnB
                 //        "airbnb-typescript/base",
-                "plugin:@angular-eslint/template/process-inline-templates"
             ],
             "rules": {
                 // Кастомные правила
