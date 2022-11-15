@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { GetBooksAll } from './get-books-all';
 import { Observable } from 'rxjs';
+import { DataBooks } from './data-books';
 
 @Injectable({
     providedIn: 'root',
@@ -10,11 +11,13 @@ import { Observable } from 'rxjs';
 export class HttpBooksService {
     constructor(private readonly http: HttpClient) {}
 
-    getBooksAll(params: GetBooksAll): Observable<any> {
-        return this.http.get(
+    getBooksAll(params: GetBooksAll): Observable<DataBooks> {
+        return this.http.get<DataBooks>(
             `${environment.urlBooks}"${params.search}"${
                 params.categories !== 'all' ? '+subject:' + params.categories : ''
-            }&startIndex=${params.startIndex}&maxResults=${params.maxResults}&orderBy=${params.orderBy}`
+            }&startIndex=${params.startIndex}&maxResults=${params.maxResults}&orderBy=${
+                params.orderBy
+            }`,
         );
     }
 }

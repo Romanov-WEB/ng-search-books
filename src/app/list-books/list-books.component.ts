@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ListBooksService } from '../shared/service/list-books.service';
 
 @Component({
     selector: 'app-list-books',
@@ -7,9 +8,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListBooksComponent implements OnInit {
-    constructor() {}
+    constructor(private readonly list: ListBooksService) {}
 
     ngOnInit(): void {
         console.log('ListBooksComponent');
+        this.list.listBooks$.subscribe((data) => {
+            console.log(data);
+        });
     }
 }
