@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DataBooks, ItemsBooks } from './data-books';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ListBooksService {
-    listBooks$!: Observable<ItemsBooks[]>
+    listBooks$: BehaviorSubject<ItemsBooks[]> = new BehaviorSubject<ItemsBooks[]>([]);
 
     constructor() {}
 
-    setListBooks(books: ItemsBooks[]): Observable<ItemsBooks[]> {
-        return this.listBooks$
+    setListBooks(books: ItemsBooks[]): void {
+        return this.listBooks$.next(books);
     }
 }

@@ -8,8 +8,9 @@ const route: Routes = [
     {
         path: '',
         component: MainLayoutComponent,
+        pathMatch: 'full',
         children: [
-            { path: 'books-list', component: ListBooksComponent },
+            { path: '', component: ListBooksComponent },
             { path: 'book/:id', component: ItemBookComponent },
         ],
     },

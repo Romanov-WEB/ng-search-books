@@ -1,17 +1,17 @@
 <form class="header" [formGroup]="form" (ngSubmit)="submit()">
-    <div>
-        <input type="text" formControlName="search" />
-        <button type="submit" [disabled]="form.invalid">Search</button>
+    <div  class="input-wrapper">
+        <input class="header__input" type="text" formControlName="search" />
+        <button class="btn__search" type="submit" [disabled]="form.invalid">Search</button>
     </div>
 
-    <div>
-        <select size="1" formControlName="categories">
+    <div class="select-wrapper">
+        <select class="header__select__categories" size="1" formControlName="categories">
             <option *ngFor="let category of categories" value="{{ category }}">
                 {{ category }}
             </option>
         </select>
 
-        <select size="1" formControlName="orderBy">
+        <select class="header__select__sorting" size="1" formControlName="orderBy">
             <option *ngFor="let sort of sorts" value="{{ sort }}">
                 {{ sort }}
             </option>
