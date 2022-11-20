@@ -1,8 +1,8 @@
 <ng-container *ngIf="list.listBooks$ | async as list">
     <div class="list-books">
         <div *ngFor="let book of list" class="item-book" [routerLink]="['/book', book.id]">
-            <div>{{ book.volumeInfo.title }}</div>
-            <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="" />
+            <div class="title">{{ book.volumeInfo.title }}</div>
+            <img class="image" [src]="book.volumeInfo.imageLinks.thumbnail" appLazyImage alt="#" />
         </div>
     </div>
 </ng-container>

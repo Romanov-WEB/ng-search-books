@@ -9,6 +9,7 @@ import { ItemsBooks } from '../shared/service/data-books';
 })
 export class BookInfoResolver implements Resolve<ItemsBooks> {
     constructor(private booksService: HttpBooksService) {}
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ItemsBooks> {
         return this.booksService.getBook(route.paramMap.get('id')!);
     }

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { HttpBooksService } from '../shared/service/http-books.service';
-import { ActivatedRoute, Route } from '@angular/router';
-import { tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
+import { ItemsBooks } from '../shared/service/data-books';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-item-book',
@@ -10,10 +11,27 @@ import { tap } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemBookComponent implements OnInit {
-    constructor(private route: ActivatedRoute) {}
+    bookData$: Observable<ItemsBooks>
+
+    constructor(
+        public readonly route: ActivatedRoute,
+        public readonly _location: Location
+    ) {
+       this.bookData$ = this.route.data
+            .pipe(
+                map((data) => {
+                    const { book } = data;
+                    console.log(book)
+                    return book;
+                }),
+            )
+    }
 
     ngOnInit(): void {
         console.log('ItemBookComponent');
-        this.route.data.pipe(tap(console.log)).subscribe();
+    }
+
+    backClicked(): void {
+        this._location.back()
     }
 }

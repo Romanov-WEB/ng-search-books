@@ -6,8 +6,9 @@ import { MainLayoutComponent } from './shared/components/main-layout/main-layout
 import { SharedModule } from './shared/module/shared.module';
 import { RouterAppModule } from './shared/module/router-app.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoadBooksInterceptor } from './shared/service/load-books.interceptor';
+import { LoadBooksInterceptor } from './shared/interceptors/load-books.interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { LazyImageDirective } from './shared/directive/lazy-image.directive';
 
 const INTERCEPTOR_PROVIDER: Provider = {
     provide: HTTP_INTERCEPTORS,
@@ -22,6 +23,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
         ItemBookComponent,
         MainLayoutComponent,
         LoaderComponent,
+        LazyImageDirective,
     ],
     imports: [SharedModule, RouterAppModule],
     providers: [INTERCEPTOR_PROVIDER],
