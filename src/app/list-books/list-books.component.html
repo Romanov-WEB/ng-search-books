@@ -1,2 +1,10 @@
-<p>list-books works!</p>
+<ng-container *ngIf="list.listBooks$ | async as list">
+    <div class="list-books">
+        <div *ngFor="let book of list" class="item-book" [routerLink]="['/book', book.id]">
+            <div>{{ book.volumeInfo.title }}</div>
+            <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="" />
+        </div>
+    </div>
+</ng-container>
+
 <app-loader></app-loader>

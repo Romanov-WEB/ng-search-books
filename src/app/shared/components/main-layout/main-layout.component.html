@@ -1,5 +1,5 @@
 <form class="header" [formGroup]="form" (ngSubmit)="submit()">
-    <div  class="input-wrapper">
+    <div class="input-wrapper">
         <input class="header__input" type="text" formControlName="search" />
         <button class="btn__search" type="submit" [disabled]="form.invalid">Search</button>
     </div>
@@ -19,6 +19,4 @@
     </div>
 </form>
 
-<div class="container">
-    <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

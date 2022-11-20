@@ -5,6 +5,7 @@
 export const environment = {
     production: false,
     urlBooks: 'https://www.googleapis.com/books/v1/volumes?q=intitle',
+    urlBook: 'https://www.googleapis.com/books/v1/volumes/',
 };
 
 /*

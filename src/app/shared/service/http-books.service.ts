@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { GetBooksAll } from './get-books-all';
 import { Observable } from 'rxjs';
-import { DataBooks } from './data-books';
+import { DataBooks, ItemsBooks } from './data-books';
 
 @Injectable({
     providedIn: 'root',
@@ -21,5 +21,9 @@ export class HttpBooksService {
                 orderBy: params.orderBy,
             },
         });
+    }
+
+    getBook(id: string): Observable<ItemsBooks> {
+        return this.http.get<ItemsBooks>(`${environment.urlBook}${id}`);
     }
 }
