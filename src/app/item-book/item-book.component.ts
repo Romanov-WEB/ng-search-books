@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {map, Observable} from 'rxjs';
-import {ItemsBooks} from '../shared/service/data-books';
-import {Location} from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
+import { ItemsBooks } from '../shared/service/data-books';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-item-book',

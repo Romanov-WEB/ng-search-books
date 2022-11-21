@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {HttpBooksService} from '../../service/http-books.service';
-import {Categories, Sorting} from '../../service/categories.types';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ListBooksService} from '../../../list-books/list-books.service';
-import {combineLatest, debounceTime, startWith, Subject, switchMap, tap} from 'rxjs';
-import {Router} from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { HttpBooksService } from '../../service/http-books.service';
+import { Categories, Sorting } from '../../service/categories.types';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ListBooksService } from '../../../list-books/list-books.service';
+import { combineLatest, debounceTime, startWith, Subject, switchMap, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-main-layout',
