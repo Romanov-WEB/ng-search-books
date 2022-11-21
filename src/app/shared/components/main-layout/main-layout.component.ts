@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { HttpBooksService } from '../../service/http-books.service';
-import { Categories, Sorting } from '../../service/categories.types';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ListBooksService } from '../../../list-books/list-books.service';
-import { combineLatest, debounceTime, startWith, Subject, switchMap, tap } from 'rxjs';
-import { Router } from '@angular/router';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {HttpBooksService} from '../../service/http-books.service';
+import {Categories, Sorting} from '../../service/categories.types';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ListBooksService} from '../../../list-books/list-books.service';
+import {combineLatest, debounceTime, startWith, Subject, switchMap, tap} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-main-layout',
@@ -32,7 +32,7 @@ export class MainLayoutComponent implements OnInit {
             categories: new FormControl(Categories.All, Validators.required),
             orderBy: new FormControl(Sorting.Relevance, Validators.required),
         });
-        this.dataList()
+        this.dataList();
     }
 
     dataList() {
@@ -40,22 +40,22 @@ export class MainLayoutComponent implements OnInit {
             this.data$.pipe(startWith(() => this.data$.next())),
             this.form.valueChanges.pipe(debounceTime(2500)),
         ])
-        .pipe(
-            switchMap(([_, form]) => {
-                return this.booksData.getBooksAll({
-                    ...form,
-                    startIndex: 0,
-                    maxResults: 30,
-                });
-            }),
-            tap((data) => {
-                if (this.form.valid) {
-                    this.listBooks.setListBooks(data.items!);
-                    this.router.navigate(['/']).then();
-                }
-            }),
-        )
-        .subscribe();
+            .pipe(
+                switchMap(([_, form]) => {
+                    return this.booksData.getBooksAll({
+                        ...form,
+                        startIndex: 0,
+                        maxResults: 30,
+                    });
+                }),
+                tap((data) => {
+                    if (this.form.valid) {
+                        this.listBooks.setListBooks(data.items!);
+                        this.router.navigate(['/']).then();
+                    }
+                }),
+            )
+            .subscribe();
     }
 
     submit() {

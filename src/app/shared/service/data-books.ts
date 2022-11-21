@@ -50,10 +50,10 @@ export interface PanelizationSummary {
     containsImageBubbles: boolean;
 }
 export interface ImageLinks {
-    medium: string
-    small: string
-    large: string
-    extraLarge: string
+    medium: string;
+    small: string;
+    large: string;
+    extraLarge: string;
     smallThumbnail: string;
     thumbnail: string;
 }
