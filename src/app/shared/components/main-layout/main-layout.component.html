@@ -20,3 +20,7 @@
 </form>
 
 <router-outlet></router-outlet>
+
+<ng-container *ngIf="listBooks.listBooks$.value.length">
+    <button class="btn" (click)="addBooksMore()">More</button>
+</ng-container>

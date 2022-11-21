@@ -3,7 +3,7 @@ import { HttpBooksService } from '../../service/http-books.service';
 import { Categories, Sorting } from '../../service/categories.types';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListBooksService } from '../../../list-books/list-books.service';
-import { combineLatest, debounceTime, startWith, Subject, switchMap, tap } from 'rxjs';
+import { combineLatest, debounceTime, filter, startWith, Subject, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ export class MainLayoutComponent implements OnInit {
 
     constructor(
         private readonly booksData: HttpBooksService,
-        private readonly listBooks: ListBooksService,
+        public readonly listBooks: ListBooksService,
         private readonly router: Router,
     ) {}
 
@@ -32,6 +32,7 @@ export class MainLayoutComponent implements OnInit {
             categories: new FormControl(Categories.All, Validators.required),
             orderBy: new FormControl(Sorting.Relevance, Validators.required),
         });
+
         this.dataList();
     }
 
@@ -44,10 +45,11 @@ export class MainLayoutComponent implements OnInit {
                 switchMap(([_, form]) => {
                     return this.booksData.getBooksAll({
                         ...form,
-                        startIndex: 0,
+                        startIndex: this.listBooks.listBooks$.getValue().length,
                         maxResults: 30,
                     });
                 }),
+                filter(Boolean),
                 tap((data) => {
                     if (this.form.valid) {
                         this.listBooks.setListBooks(data.items!);
@@ -59,6 +61,10 @@ export class MainLayoutComponent implements OnInit {
     }
 
     submit() {
+        this.data$.next();
+    }
+
+    addBooksMore() {
         this.data$.next();
     }
 }
