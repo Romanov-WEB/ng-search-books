@@ -17,7 +17,6 @@ export class ItemBookComponent implements OnInit {
         this.bookData$ = this.route.data.pipe(
             map((data) => {
                 const { book } = data;
-                console.log(book);
                 return book;
             }),
         );
