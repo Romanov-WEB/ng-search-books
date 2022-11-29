@@ -3,7 +3,7 @@ import { HttpBooksService } from '../../service/http-books.service';
 import { Categories, Sorting } from '../../service/categories.types';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListBooksService } from '../../../list-books/list-books.service';
-import { combineLatest, debounceTime, startWith, Subject, switchMap, tap } from 'rxjs';
+import {catchError, combineLatest, debounceTime, map, startWith, Subject, switchMap, tap} from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,10 +36,10 @@ export class MainLayoutComponent implements OnInit {
         console.log('MainLayoutComponent');
     }
 
-    dataList() {
+    private dataList() {
         combineLatest([
             this.data$.pipe(startWith(() => this.data$.next())),
-            this.form.valueChanges.pipe(debounceTime(9000)),
+            this.form.valueChanges.pipe(debounceTime(2000)),
         ])
             .pipe(
                 switchMap(([_, form]) => {
@@ -47,11 +47,13 @@ export class MainLayoutComponent implements OnInit {
                         ...form,
                         startIndex: this.listBooks.listBooks$.getValue().length,
                         maxResults: 30,
-                    });
+                    }).pipe(
+                        map((books) => books.items)
+                    )
                 }),
                 tap((data) => {
                     if (this.form.valid) {
-                        this.listBooks.setListBooks(data.items!);
+                        this.listBooks.setListBooks(data!);
                         this.router.navigate(['/']).then();
                     }
                 }),
